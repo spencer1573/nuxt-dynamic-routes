@@ -14,6 +14,7 @@ export default {
   validate ({ params }) {
     return !isNaN(+params.id)
   },
+  props: ['person'],
   head: {
     title: this.id,
     meta: [
