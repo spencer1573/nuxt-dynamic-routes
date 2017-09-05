@@ -1,21 +1,30 @@
+import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+Vue.use(Vuex)
 
 const store = () => {
   return new Vuex.Store({
     state: {
-      todos: ['yest', 'aoisd', 'aosidf']
-    },
-    getters: {
-      todos: state => state.todos
+      projects: []
     },
     actions: {
-      setTodos ({ commit }, value) {
-        commit('SET_TODOS', value)
+      LOAD_PROJECT_LIST: function ({ commit }) {
+        axios.get('https://jsonplaceholder.typicode.com/users').then((response) => {
+          commit('SET_PROJECT_LIST', { list: response.data })
+        }, (err) => {
+          console.log(err)
+        })
       }
     },
     mutations: {
-      SET_TODOS: (state, value) => {
-        state.value = value
+      SET_PROJECT_LIST: (state, { list }) => {
+        state.projects = list
+      }
+    },
+    getters: {
+      openProjects: state => {
+        return state.projects.filter(project => !project.completed)
       }
     }
   })
