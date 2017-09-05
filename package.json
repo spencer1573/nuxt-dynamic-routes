@@ -10,6 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "nuxt generate --spa && firebase deploy",
+    "pull-deploy": "git pull && nuxt generate --spa && firebase deploy",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
