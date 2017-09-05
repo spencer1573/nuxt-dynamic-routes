@@ -8,16 +8,9 @@
 </template>
 
 <script>
-
-import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 
 export default {
-  computed: {
-    ...mapGetters([
-      'people'
-    ])
-  },
   head () {
     return {
       title: this.name,
@@ -37,16 +30,6 @@ export default {
     } catch (e) {
       error({ message: 'User not found', statusCode: 404 })
     }
-  },
-  methods: {
-    ...mapActions([
-      'loadPeopleList'
-    ])
-
-  },
-  mounted () {
-    this.loadPeopleList()
-    // this.title = 's2'
   }
 }
 </script>
