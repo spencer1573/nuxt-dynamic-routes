@@ -3,8 +3,8 @@
     <h2>Users</h2>
     <ul class="users">
       <li v-for="person in people">
-        <p style="padding: 10px;">{{person.name}}</p>
-        <!-- <nuxt-link :to="'/users/'+todo">{{ todo }}</nuxt-link> -->
+        <!-- <p style="padding: 10px;">{{person.name}}</p> -->
+        <nuxt-link :to="'/users/'+person.id">{{ person.name }}</nuxt-link>
       </li>
     </ul>
     <a @click="getProject()">click</a>
@@ -20,6 +20,16 @@ export default {
     ...mapGetters([
       'people'
     ])
+  },
+  head: {
+    title: 'This is the about page',
+    meta: [
+      {
+        id: 'description',
+        name: 'description',
+        content: 'My about page'
+      }
+    ]
   },
   methods: {
     getProject () {
@@ -47,7 +57,7 @@ h2 {
 .users {
   list-style-type: none;
 }
-.users li p {
+.users li a {
   display: inline-block;
   width: 200px;
   border: 1px #ddd solid;
