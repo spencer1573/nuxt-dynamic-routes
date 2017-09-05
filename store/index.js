@@ -6,25 +6,23 @@ Vue.use(Vuex)
 const store = () => {
   return new Vuex.Store({
     state: {
-      projects: []
+      people: []
+    },
+    getters: {
+      people: state => state.people
     },
     actions: {
-      LOAD_PROJECT_LIST: function ({ commit }) {
+      loadPeopleList: function ({ commit }) {
         axios.get('https://jsonplaceholder.typicode.com/users').then((response) => {
-          commit('SET_PROJECT_LIST', { list: response.data })
+          commit('SET_PEOPLE_LIST', { list: response.data })
         }, (err) => {
           console.log(err)
         })
       }
     },
     mutations: {
-      SET_PROJECT_LIST: (state, { list }) => {
-        state.projects = list
-      }
-    },
-    getters: {
-      openProjects: state => {
-        return state.projects.filter(project => !project.completed)
+      SET_PEOPLE_LIST: (state, { list }) => {
+        state.people = list
       }
     }
   })
