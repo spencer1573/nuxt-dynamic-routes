@@ -4,7 +4,7 @@
     <ul class="users">
       <li v-for="person in people">
         <!-- <p style="padding: 10px;">{{person.name}}</p> -->
-        <nuxt-link :person="person" :to="'/users/'+person.id">{{ person.name }}</nuxt-link>
+        <nuxt-link :to="'/users/'+person.id">{{ person.name }}</nuxt-link>
       </li>
     </ul>
     <a @click="getProject()">click</a>

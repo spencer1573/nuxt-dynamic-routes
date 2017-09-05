@@ -1,35 +1,26 @@
 <template>
   <div class="user">
-    <!-- <h3>{{ name }}</h3>
+    <h3>{{ name }}</h3>
     <h4>@{{ username }}</h4>
     <p>Email : {{ email }}</p>
-    <p><nuxt-link to="/">List of users</nuxt-link></p> -->
-    <a @click="getPerson()">click</a>
+    <p><nuxt-link to="/">List of users</nuxt-link></p>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+
 import { mapGetters, mapActions } from 'vuex'
+import axios from 'axios'
 
 export default {
-  data () {
-    return {
-      title: 's'
-    }
-  },
-  validate ({ params }) {
-    return !isNaN(+params.id)
-  },
   computed: {
     ...mapGetters([
       'people'
     ])
   },
-  props: ['person'],
   head () {
     return {
-      title: this.title,
+      title: this.name,
       meta: [
         {
           hid: 'description',
@@ -39,16 +30,6 @@ export default {
       ]
     }
   },
-  methods: {
-    getPerson () {
-      console.log('people', this.people)
-      console.log('person', this.people[0].name)
-    },
-    ...mapActions([
-      'loadPeopleList'
-    ])
-
-  },
   async asyncData ({ params, error }) {
     try {
       const { data } = await axios.get(`https://jsonplaceholder.typicode.com/users/${+params.id}`)
@@ -57,12 +38,16 @@ export default {
       error({ message: 'User not found', statusCode: 404 })
     }
   },
+  methods: {
+    ...mapActions([
+      'loadPeopleList'
+    ])
+
+  },
   mounted () {
     this.loadPeopleList()
-    this.title = this.people[0].name
     // this.title = 's2'
   }
-
 }
 </script>
 
