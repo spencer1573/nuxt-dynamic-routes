@@ -14,6 +14,16 @@ export default {
   validate ({ params }) {
     return !isNaN(+params.id)
   },
+  head: {
+    title: this.id,
+    meta: [
+      {
+        id: 'description',
+        name: 'description',
+        content: 'My about page'
+      }
+    ]
+  },
   async asyncData ({ params, error }) {
     try {
       const { data } = await axios.get(`https://jsonplaceholder.typicode.com/users/${+params.id}`)
