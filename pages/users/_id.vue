@@ -1,9 +1,11 @@
 <template>
   <div class="user">
-    <h3>{{ name }}</h3>
-    <h4>@{{ username }}</h4>
-    <p>Email : {{ email }}</p>
+    <h3>{{ data.name }}</h3>
+    <h4>@{{ data.username }}</h4>
+    <p>Email : {{ data.email }}</p>
     <p><nuxt-link to="/">List of users</nuxt-link></p>
+    <br>
+    <p>Rendered from <b>{{ status }}</b></p>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ import axios from 'axios'
 export default {
   head () {
     return {
-      title: this.name,
+      title: this.data.name,
       meta: [
         {
           hid: 'description',
@@ -23,10 +25,13 @@ export default {
       ]
     }
   },
-  async asyncData ({ params, error }) {
+  async asyncData ({ params, error, isStatic, isServer }) {
     try {
       const { data } = await axios.get(`https://jsonplaceholder.typicode.com/users/${+params.id}`)
-      return data
+      return {
+        data,
+        status: isStatic ? 'static' : (isServer ? 'server' : 'client')
+      }
     } catch (e) {
       error({ message: 'User not found', statusCode: 404 })
     }
