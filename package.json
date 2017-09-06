@@ -4,7 +4,11 @@
   "description": "nauvoo pageant invite",
   "author": "spencer1573 <spencer1573@users.noreply.github.com>",
   "private": true,
+  "engines": {
+    "node": "8.4.0"
+  },
   "scripts": {
+    "postinstall": "nuxt build",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
@@ -12,7 +16,8 @@
     "deploy": "nuxt generate --spa && firebase deploy",
     "pull-deploy": "git pull && nuxt generate --spa && firebase deploy",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.16.2",

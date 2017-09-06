@@ -1,9 +1,11 @@
+const axios = require('axios')
+
 module.exports = {
   /*
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s',
+    titleTemplate: 'Test | %s',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,6 +19,19 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#3B8070' },
+  generate: {
+    routes: function () {
+      return axios.get('https://jsonplaceholder.typicode.com/users')
+        .then((res) => {
+          return res.data.map((user) => {
+            return {
+              route: '/users/' + user.id,
+              payload: user
+            }
+          })
+        })
+    }
+  },
   /*
   ** Build configuration
   */
