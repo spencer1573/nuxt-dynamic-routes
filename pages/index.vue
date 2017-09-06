@@ -7,7 +7,6 @@
         <nuxt-link :to="'/users/'+person.id">{{ person.name }}</nuxt-link>
       </li>
     </ul>
-    <a @click="getProject()">click</a>
   </div>
 
 </template>
@@ -32,9 +31,6 @@ export default {
     ]
   },
   methods: {
-    getProject () {
-      console.log('people', this.people)
-    },
     ...mapActions([
       'loadPeopleList'
     ])

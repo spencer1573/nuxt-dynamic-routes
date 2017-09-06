@@ -3,8 +3,9 @@
     <h3>{{ data.name }}</h3>
     <h4>@{{ data.username }}</h4>
     <p>Email : {{ data.email }}</p>
-    <p><nuxt-link to="/">List of users</nuxt-link></p>
     <br>
+    <nuxt-link tag="button" to="/">List of users</nuxt-link>
+    <br><br>
     <p>Rendered from <b>{{ status }}</b></p>
   </div>
 </template>
